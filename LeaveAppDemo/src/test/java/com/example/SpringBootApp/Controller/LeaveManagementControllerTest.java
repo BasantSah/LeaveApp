@@ -1,10 +1,11 @@
-package com.example.SpringBootApp.Service;
+package com.example.SpringBootApp.Controller;
 
 import static org.junit.Assert.*;
 
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,35 +19,33 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.SpringBootApp.Constant.LeaveConstant;
+import com.example.SpringBootApp.Repositories.LeaveManagementRepo;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
-public class LeaveManagementServiceTest {
-	
-	/*
-	 * @Autowired LeaveManagementService leaveManagementService;
-	 * 
-	 */
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+public class LeaveManagementControllerTest {
+
 	@LocalServerPort
-    int randomServerPort;
-	
+	int randomServerPort;
+
+	Logger logger = Logger.getLogger(LeaveManagementRepo.class.getName());
+
 	@Test()
 	public void testHelloWorld() {
 		try {
-		RestTemplate restTemplate = new RestTemplate();
-		final String baseUrl = "http://localhost:" + randomServerPort + "/getHelloWorld";
-	    URI uri = new URI(baseUrl);
-	    ResponseEntity<Object> result = restTemplate.getForEntity(uri, Object.class);
-	  //Verify request succeed
-	    assertEquals(200, result.getStatusCodeValue());
-	    
-		}
-		catch(Exception e)
-		{
-			System.out.println("Exception occur in testHelloWorld "+e);
+			RestTemplate restTemplate = new RestTemplate();
+			final String baseUrl = "http://localhost:" + randomServerPort + "/getHelloWorld";
+			URI uri = new URI(baseUrl);
+			ResponseEntity<Object> result = restTemplate.getForEntity(uri, Object.class);
+			// Verify request succeed
+			assertEquals(200, result.getStatusCodeValue());
+
+		} catch (Exception e) {
+
+			logger.info("Exception occur in testHelloWorld " + e);
 		}
 	}
-	
+
 	@Test()
 	public void testGetLeaveDetails() {
 
@@ -58,14 +57,16 @@ public class LeaveManagementServiceTest {
 			URI uri = new URI(baseUrl);
 			ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
 			// Verify request succeed
-			System.out.println("GetLeave Test " + result.getStatusCode() + " ResCodeValue " + result.getStatusCodeValue());
+
+			logger.info("GetLeave Test " + result.getStatusCode() + " ResCodeValue " + result.getStatusCodeValue());
 			assertEquals(200, result.getStatusCodeValue());
 
 		} catch (Exception e) {
-			e.printStackTrace();
+
+			logger.info("Exception occur in testGetLeaveDetails " + e);
 		}
 	}
-	
+
 	@Test()
 	public void testApplyLeave() {
 
@@ -75,15 +76,15 @@ public class LeaveManagementServiceTest {
 
 			final String baseUrl = "http://localhost:" + randomServerPort + "/applyLeave";
 			URI uri = new URI(baseUrl);
-			
-			
+
 			ResponseEntity<String> result = restTemplate.getForEntity(uri, String.class);
 			// Verify request succeed
-			System.out.println("Apply Test " + result.getStatusCode() + " ResCodeValue " + result.getStatusCodeValue());
+
+			logger.info("Apply Test " + result.getStatusCode() + " ResCodeValue " + result.getStatusCodeValue());
 			assertEquals(200, result.getStatusCodeValue());
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.info("Exception occur in testApplyLeave " + e);
 		}
 	}
 
