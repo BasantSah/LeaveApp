@@ -1,24 +1,19 @@
 package com.example.SpringBootApp.Controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.SpringBootApp.Constant.LeaveConstant;
 import com.example.SpringBootApp.Repositories.LeaveManagementRepo;
 
 @RunWith(SpringRunner.class)
